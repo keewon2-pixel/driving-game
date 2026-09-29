@@ -18,11 +18,11 @@
   #dest{left:50%;top:18px;transform:translateX(-50%);text-align:center;font-size:18px;background:rgba(0,0,0,.4);padding:8px 16px;border-radius:10px;min-width:320px}
   #zone{left:50%;top:78px;transform:translateX(-50%);font-size:16px;background:rgba(0,0,0,.4);padding:4px 12px;border-radius:8px}
   #zone.jam{background:rgba(198,40,40,.7)}#zone.slow{background:rgba(245,124,0,.7)}#zone.open{background:rgba(46,125,50,.6)}
-  #log{left:24px;top:20px;font-size:15px;width:300px}
+  #log{left:24px;top:96px;font-size:15px;width:300px}
   #log div{background:rgba(0,0,0,.5);padding:6px 10px;margin-bottom:4px;border-radius:6px;border-left:4px solid #ff5252}
   #log div.good{border-left-color:#66bb6a}
-  #traffic{position:absolute;right:24px;bottom:24px;width:260px;height:70px;background:rgba(0,0,0,.55);border-radius:8px;border:1px solid rgba(255,255,255,.3)}
-  #help{right:24px;bottom:106px;font-size:12px;opacity:.75;text-align:right;line-height:1.6}
+  #traffic{position:absolute;right:24px;top:140px;width:260px;height:70px;background:rgba(0,0,0,.55);border-radius:8px;border:1px solid rgba(255,255,255,.3)}
+  #help{right:200px;bottom:24px;font-size:12px;opacity:.75;text-align:right;line-height:1.6}
   #overlay{position:absolute;inset:0;background:rgba(0,0,0,.72);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;text-align:center}
   #overlay h1{font-size:56px;margin:0 0 6px;letter-spacing:2px}
   #overlay p{margin:5px}
@@ -30,10 +30,14 @@
   #overlay .stats{font-size:16px;opacity:.85;line-height:1.7;margin-top:10px}
   #warn{left:50%;top:44%;transform:translate(-50%,-50%);font-size:46px;font-weight:bold;color:#ff5252;opacity:0;transition:opacity .2s;white-space:nowrap}
   #time{right:24px;top:110px;font-size:16px;opacity:.85}
-  #energy{left:24px;bottom:126px;width:220px}
-  #energy .lbl{font-size:13px;margin-bottom:3px}
-  #energy .bar{height:14px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.4);border-radius:7px;overflow:hidden}
-  #energy .fill{height:100%;width:100%;background:#66bb6a;transition:width .2s,background .2s}
+  #energy{left:24px;top:20px;width:300px;background:rgba(0,0,0,.45);padding:8px 12px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.25)}
+  #energy .lbl{font-size:15px;font-weight:bold;margin-bottom:5px}
+  #energy .bar{height:22px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.5);border-radius:11px;overflow:hidden}
+  #energy .fill{height:100%;width:100%;background:linear-gradient(#8bc34a,#43a047);transition:width .25s,background .3s}
+  #energy.low .fill{background:linear-gradient(#ffd54f,#fb8c00)}
+  #energy.crit .fill{background:linear-gradient(#ff8a80,#d32f2f)}
+  #energy.low{border-color:#ffb300}#energy.crit{border-color:#ff1744;animation:blink .6s infinite}
+  @keyframes blink{50%{background:rgba(180,0,0,.55)}}
 
   /* ---- 모바일 터치 컨트롤 ---- */
   #touch{display:block;position:absolute;inset:0;pointer-events:none;user-select:none;-webkit-user-select:none}
@@ -41,9 +45,9 @@
   body.coarse #help,body.coarse #minimap,body.coarse #traffic{display:none}
   body.coarse #speed{left:auto;right:16px;bottom:200px;font-size:40px}
   body.coarse #gear{left:auto;right:16px;bottom:250px;font-size:15px}
-  body.coarse #energy{left:16px;bottom:200px;width:160px}
+  body.coarse #energy{left:12px;top:12px;width:190px;padding:5px 8px 7px}body.coarse #energy .lbl{font-size:12px}body.coarse #energy .bar{height:14px}
   body.coarse #carName{left:16px;bottom:240px;font-size:12px}
-  body.coarse #log{font-size:12px;width:200px;top:60px}
+  body.coarse #log{font-size:12px;width:200px;top:74px}
   body.coarse #score{font-size:14px}body.coarse #score b{font-size:26px}
   body.coarse #dest{font-size:13px;padding:5px 10px;min-width:0}
   body.coarse #signal,body.coarse #zone{font-size:12px;top:52px}
@@ -87,7 +91,7 @@
 <div id="overlay">
   <h1>고속도로 운전</h1>
   <p>서울 → 부산 고속도로 운전연습 시뮬레이터</p>
-  <p class="sub">정체 구간에서는 차가 막히지만 왼쪽 1~2개 차로는 소통되고, 뻥 뚫린 구간에서는 마음껏 속도를 낼 수 있습니다.<br>중간중간 나오는 휴게소·졸음쉼터에 들어가 3초 이상 정차하면 에너지가 회복됩니다.<br>신호등은 없지만 길가의 동물들이 가끔 도로에 뛰어들어 차를 공격합니다. F 키로 총을 쏴 쫓아내세요.<br>제한속도 100km/h, 갓길 주행 금지, 차량 충돌 시 추격을 당합니다. 에너지가 0이 되면 게임 오버!</p>
+  <p class="sub">정체 구간에서는 차가 막히지만 왼쪽 1~2개 차로는 소통되고, 뻥 뚫린 구간에서는 마음껏 속도를 낼 수 있습니다.<br>중간중간 나오는 휴게소·졸음쉼터에 들어가 3초 이상 정차하면 에너지가 회복됩니다. 산을 뚫는 터널도 지나갑니다.<br>차량끼리 부딪히면 질량에 따라 밀리거나 튕겨 날아갑니다. 트럭·버스는 무겁고 오토바이·자전거는 가볍습니다. 도로 위 빨간 기름통을 먹으면 에너지가 25 회복됩니다.<br>신호등은 없지만 길가의 동물들이 가끔 도로에 뛰어들어 차를 공격합니다. F 키로 총을 쏴 쫓아내세요.<br>제한속도 100km/h, 갓길 주행 금지, 차량 충돌 시 추격을 당합니다. 에너지가 0이 되면 게임 오버!</p>
   <p class="stats" id="stats"></p>
   <p class="sub">B 키로 차량을 고를 수 있습니다: 경찰차 · 소방차 · 스포티지 · 그랜저 · 택시 · 오토바이 · 자전거. 공룡(티라노사우루스 등 11종)도 출현합니다!</p>
   <p style="margin-top:24px;font-size:22px">아무 키나 눌러 시작</p>
@@ -120,7 +124,7 @@ scene.fog=new THREE.Fog(0xdbe7f3,300,1100);
 const camera=new THREE.PerspectiveCamera(60,1,0.5,2500);
 function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
 addEventListener('resize',resize);resize();
-scene.add(new THREE.HemisphereLight(0xe8f0ff,0x8a9a6a,0.9));
+const hemi=new THREE.HemisphereLight(0xe8f0ff,0x8a9a6a,0.9);scene.add(hemi);
 const sun=new THREE.DirectionalLight(0xffd9a8,1.25);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
 const sc=sun.shadow.camera;sc.near=10;sc.far=500;sc.left=-110;sc.right=110;sc.top=110;sc.bottom=-110;sun.shadow.bias=-0.0015;
 scene.add(sun);scene.add(sun.target);
@@ -135,7 +139,7 @@ function textPlane(text,bg,fg,w,h,font,pw=256){const m=new THREE.Mesh(new THREE.
 
 // ---------------- 고속도로 배경 (x: -1800 ~ 2400, 주기 P) ----------------
 const X0=-3*P, X1=4*P;
-const railGap=[];
+const railGap=[];const signGroups=[];
 {
   const g=new THREE.Mesh(new THREE.PlaneGeometry(X1-X0+2000,3000),lamb(0x7a9a5a));g.rotation.x=-Math.PI/2;g.position.set((X0+X1)/2,-0.05,0);g.receiveShadow=true;scene.add(g);
   const road=new THREE.Mesh(new THREE.PlaneGeometry(X1-X0,RAIL*2),lamb(0x35373b));road.rotation.x=-Math.PI/2;road.position.set((X0+X1)/2,0,0);road.receiveShadow=true;scene.add(road);
@@ -179,10 +183,11 @@ const railGap=[];
     [-RAIL-5,0,RAIL+5].forEach(z=>scene.add(box(2.0,7,2.0,0x8a8a84,bx+40,3.5,z)));
     // 표지판 (도로 위 안내판)
     const signTexts=[['부산 '+(320-((k+3)%7)*40)+'km\n대구 '+(200-((k+3)%7)*25)+'km','#0d6b2e'],['휴게소 5km\n주유소  식당','#0d6b2e'],['졸음운전 주의\n안전거리 확보','#1a4f9c'],['제한속도 100\n갓길 주행 금지','#c62828']];
+    const sg=new THREE.Group();scene.add(sg);signGroups.push({k,mesh:sg});
     [1,-1].forEach(s=>{const [txt,col]=signTexts[((k+3)*2+(s>0?0:1))%signTexts.length];const sx=bx+330+(s>0?0:150);
-      scene.add(box(0.5,8,0.5,0x666666,sx,4,s*(RAIL-0.5)));scene.add(box(0.5,8,0.5,0x666666,sx,4,s*(INNER+0.5)));scene.add(box(0.4,0.4,RAIL-INNER,0x666666,sx,8,s*(RAIL+INNER)/2));
-      const sp=textPlane(txt,col,'#ffffff',10,3.2,'bold 64px sans-serif',512);sp.position.set(sx-0.26,7.2,s*(RAIL+INNER)/2);sp.rotation.y=s>0?-Math.PI/2:Math.PI/2;scene.add(sp);
-      const back=box(0.2,3.2,10,0x555555,sx,7.2,s*(RAIL+INNER)/2);scene.add(back);});
+      sg.add(box(0.5,8,0.5,0x666666,sx,4,s*(RAIL-0.5)));sg.add(box(0.5,8,0.5,0x666666,sx,4,s*(INNER+0.5)));sg.add(box(0.4,0.4,RAIL-INNER,0x666666,sx,8,s*(RAIL+INNER)/2));
+      const sp=textPlane(txt,col,'#ffffff',10,3.2,'bold 64px sans-serif',512);sp.position.set(sx-0.26,7.2,s*(RAIL+INNER)/2);sp.rotation.y=s>0?-Math.PI/2:Math.PI/2;sg.add(sp);
+      const back=box(0.2,3.2,10,0x555555,sx,7.2,s*(RAIL+INNER)/2);sg.add(back);});
   }
 }
 
@@ -249,6 +254,34 @@ function updateRestRules(dt,t){
   if(ra&&player.z>RAIL+1&&Math.abs(player.speed)<0.3){restStay+=dt;if(restStay>3&&restRewarded!==ra.g){restRewarded=ra.g;setEnergy(energy+15);logMsg(ra.r.kind+'에서 휴식 완료! 에너지 +15',true,5);}}else restStay=0;
 }
 
+// ---------------- 터널 (전역 주기 g%6==4, 로컬 80~520) ----------------
+const TUN={gp:4,x0:80,x1:520};
+function tunnelAt(x){const k=Math.floor(x/P);if(((shift+k)%6+6)%6!==TUN.gp)return null;const lx=x-k*P;return (lx>=TUN.x0&&lx<=TUN.x1)?{k,lx}:null;}
+function buildTunnel(){
+  const g=new THREE.Group();const len=TUN.x1-TUN.x0,cx=(TUN.x0+TUN.x1)/2;const W=RAIL+2.4;
+  const wallMat=lamb(0xd8d8d0),concrete=lamb(0x8a8a84);
+  [1,-1].forEach(s=>{g.add(box(len,7.5,1.2,0,cx,3.75,s*W,wallMat));g.add(box(len,1.2,0.3,0x2f2f2f,cx,1.0,s*(W-0.7)));});
+  g.add(box(len,1.2,W*2+2.4,0,cx,7.9,0,concrete));
+  // 산 (터널 위)
+  const hill=new THREE.Mesh(new THREE.CylinderGeometry(0,W*2+60,42,10),lamb(0x5f8a55));hill.rotation.z=0;hill.position.set(cx,8+21,0);hill.scale.set(len/(W*2+60)*0.6,1,1);g.add(hill);
+  const hill2=new THREE.Mesh(new THREE.BoxGeometry(len+40,26,W*2+50),lamb(0x6b8f5e));hill2.position.set(cx,8+13,0);g.add(hill2);
+  for(let x=TUN.x0-10;x<TUN.x1+10;x+=14){[1,-1].forEach(s=>{const t=new THREE.Mesh(new THREE.ConeGeometry(2.4,7,7),lamb(0x3f7f3a));t.position.set(x+rnd(-3,3),34+3,s*rnd(4,W+20));g.add(t);});}
+  // 입구/출구 포털
+  [TUN.x0,TUN.x1].forEach(px=>{g.add(box(2.0,10,W*2+6,0,px,5,0,concrete));const hole=box(2.2,7.4,W*2-0.2,0,px,3.7,0,new THREE.MeshBasicMaterial({color:0x101014}));g.add(hole);
+    const sign=textPlane('경부 터널  길이 440m\n전조등 켜기 · 차로 변경 금지','#1a4f9c','#ffffff',12,2.6,'bold 56px sans-serif',512);sign.position.set(px-(px===TUN.x0?1.05:-1.05),9.2,0);sign.rotation.y=px===TUN.x0?-Math.PI/2:Math.PI/2;g.add(sign);});
+  // 천장 조명
+  const lampMat=new THREE.MeshBasicMaterial({color:0xfff1c4});
+  for(let x=TUN.x0+6;x<TUN.x1;x+=10)[8,-8].forEach(z=>{g.add(box(1.2,0.15,0.4,0,x,7.25,z,lampMat));});
+  g.visible=false;scene.add(g);return g;
+}
+let tunnelGroup=null,tunnelDark=0;
+function updateTunnel(dt){
+  if(!tunnelGroup)tunnelGroup=buildTunnel();
+  let g=shift-1;while(((g%6)+6)%6!==TUN.gp)g++;tunnelGroup.position.x=(g-shift)*P;tunnelGroup.visible=true;
+  signGroups.forEach(o=>{o.mesh.visible=((shift+o.k)%6+6)%6!==TUN.gp;});
+  const inside=!!tunnelAt(player.x);tunnelDark+=((inside?1:0)-tunnelDark)*Math.min(1,dt*3);
+}
+
 // ---------------- 차량 모델 ----------------
 const glassMat=lamb(0x1f2a3a),tireMat=lamb(0x151515),wheelG=new THREE.CylinderGeometry(1,1,1,12);
 function wheel(r,w,x,z){const m=new THREE.Mesh(wheelG,tireMat);m.scale.set(r,w,r);m.rotation.x=Math.PI/2;m.position.set(x,r,z);m.castShadow=true;return m;}
@@ -298,7 +331,7 @@ const zoneName=gx=>({open:'원활 구간 — 속도를 내세요 (제한 100km/h
 
 // ---------------- 플레이어 ----------------
 let shift=0; // 월드 이동 횟수 (전역 x = x + shift*P)
-const player={x:60,z:laneZ(2,1),a:0,speed:0,steer:0,len:4.4,wid:1.8};
+const player={x:60,z:laneZ(2,1),a:0,speed:0,steer:0,len:4.4,wid:1.8,svx:0,svz:0,spin:0,airT:0,vy:0,y:0};
 const gxOf=x=>x+shift*P;
 // ---------------- 플레이어 차량 선택 (B) ----------------
 function makeFire(){const g=new THREE.Group();const L=9.0,Wd=2.5;const red=0xd32f2f;
@@ -338,7 +371,7 @@ function setCar(idx){
   playerMesh=car.mk();
   const sw=car.signW||1.7;playerMesh.add(box(sw,0.6*sw/1.7,0.12,0x1e88e5,-0.2,car.signY,0));[1,-1].forEach(sd=>{const roof=textPlane('오주한','#1e88e5','#ffffff',sw*0.94,0.5*sw/1.7,'bold 100px sans-serif');roof.position.set(-0.2,car.signY,sd*0.065);roof.rotation.y=sd>0?0:Math.PI;playerMesh.add(roof);});
   player.len=playerMesh.userData.len;player.wid=playerMesh.userData.wid;
-  playerMesh.position.set(player.x,0,player.z);playerMesh.rotation.y=-player.a;scene.add(playerMesh);
+  playerMesh.position.set(player.x,player.y||0,player.z);playerMesh.rotation.y=-player.a;playerMesh.rotation.z=player.airT>0?player.vy*0.03:0;scene.add(playerMesh);
   const el=document.getElementById('carName');if(el)el.textContent='🚗 '+car.name+' — '+car.desc+'  (B: 차량 변경)';
 }
 setCar(0);
@@ -357,7 +390,7 @@ function spawnAt(x,dir){
   if(vehicles.some(o=>o.dir===dir&&Math.abs(o.x-x)<(zone==='jam'&&!openL?9:22)&&Math.abs(o.z-z)<2.5))return false;
   if(Math.abs(x-player.x)<30&&Math.abs(z-player.z)<3)return false;
   const [s0,s1]=openL?[13,18]:zoneSpeed[zone];const f=rnd(T.f[0],T.f[1]);
-  const v={mesh,type:T.t,len:mesh.userData.len,wid:mesh.userData.wid,dir,lane,x,z,zt:z,speed:rnd(s0,s1)*f,f,laneCd:rnd(2,8),stopT:0,lastHit:-9};
+  const v={mesh,type:T.t,len:mesh.userData.len,wid:mesh.userData.wid,dir,lane,x,z,zt:z,speed:rnd(s0,s1)*f,f,laneCd:rnd(2,8),stopT:0,lastHit:-9,stun:0,pvx:0,pvz:0,y:0};
   mesh.position.set(x,0,z);mesh.rotation.y=dir>0?0:Math.PI;scene.add(mesh);vehicles.push(v);return true;
 }
 function fillTraffic(){
@@ -390,9 +423,13 @@ function updateVehicle(v,dt,bodies,t){
     if(v.laneCd<=0)v.laneCd=1.5;
   }
   if(v.speed<target)v.speed=Math.min(target,v.speed+(zone==='jam'?2.0:3.0)*dt);else v.speed=Math.max(target,v.speed-9*dt);
+  if(v.stun>0){v.stun-=dt;target=0;}
   v.x+=v.dir*v.speed*dt;
+  if(v.pvx||v.pvz){v.x+=v.pvx*dt;v.z+=v.pvz*dt;const k=Math.exp(-2.2*dt);v.pvx*=k;v.pvz*=k;if(Math.abs(v.pvx)<0.05)v.pvx=0;if(Math.abs(v.pvz)<0.05)v.pvz=0;const sd=Math.sign(v.z)||v.dir;v.z=sd*clamp(Math.abs(v.z),MED+v.wid/2,RAIL-v.wid/2);}
+  if(v.air){v.y=(v.y||0)+v.vy*dt;v.vy-=22*dt;if(v.y<=0){v.y=0;v.air=0;v.vy=0;}}
+  if(v.spin){v.spinA=(v.spinA||0)+v.spin*dt;v.spin*=Math.exp(-1.8*dt);if(Math.abs(v.spin)<0.05)v.spin=0;}else if(v.spinA){v.spinA*=Math.exp(-2*dt);}
   const dz=v.zt-v.z;const mz=Math.min(Math.abs(dz),(1.5+v.speed*0.05)*dt);v.z+=Math.sign(dz)*mz;
-  v.mesh.position.set(v.x,0,v.z);v.mesh.rotation.y=(v.dir>0?0:Math.PI)-(v.dir*Math.sign(dz)*Math.min(0.12,Math.abs(dz)*0.1));
+  v.mesh.position.set(v.x,v.y||0,v.z);v.mesh.rotation.y=(v.dir>0?0:Math.PI)-(v.dir*Math.sign(dz)*Math.min(0.12,Math.abs(dz)*0.1))+(v.spinA||0);v.mesh.rotation.z=v.air?(v.vy||0)*0.04:0;
   if(v.mesh.userData.wheels)v.mesh.userData.wheels.forEach(w=>w.rotation.y-=v.speed*dt/0.4);
 }
 
@@ -487,9 +524,16 @@ const AKW=ANIMAL_KINDS.reduce((s,a)=>s+a[1],0);
 function pickKind(){let r=Math.random()*AKW;for(const a of ANIMAL_KINDS){r-=a[1];if(r<=0)return a[0];}return 'rabbit';}
 const animals=[];let animalFront=-200;
 function spawnAnimal(x){
+  if(tunnelAt(x)||tunnelAt(x+40)||tunnelAt(x-40))return;
   const kind=pickKind();const mesh=makeAnimal(kind);const u=mesh.userData;const side=Math.random()<0.5?1:-1;
   const a={mesh,kind,side,len:u.len,wid:u.wid,dmg:u.dmg,walk:u.walk,run:u.run,canJump:u.jump,aggr:u.aggr,name:u.name,x,z:side*rnd(RAIL+3,RAIL+22),y:0,a:rnd(0,Math.PI*2),speed:0,state:'idle',timer:rnd(1,3),jumpT:0,lastHit:-9,stun:0,attackCd:rnd(2,8)};
   mesh.position.set(a.x,0,a.z);scene.add(mesh);animals.push(a);
+}
+let canFront=-100;
+function fillCans(){
+  const front=player.x+600;
+  while(canFront<front){if(Math.random()<0.5&&!tunnelAt(canFront)){const x=canFront+rnd(0,40);const z=laneZ(ri(0,NL-1),1);if(!vehicles.some(v=>Math.abs(v.x-x)<8&&Math.abs(v.z-z)<2.5)){const mesh=makeCan();mesh.position.set(x,0.3,z);scene.add(mesh);cans.push({x,z,mesh,ph:rnd(0,6)});}}canFront+=300;}
+  for(let i=cans.length-1;i>=0;i--){const c=cans[i];if(c.x<player.x-150){scene.remove(c.mesh);cans.splice(i,1);}}
 }
 function fillAnimals(){
   const front=player.x+600;
@@ -580,6 +624,19 @@ function updateChasers(dt,t){
   $('zone').textContent='🚨 추격 중! '+Math.ceil(pursuit.timeLeft)+'초 버티면 따돌림 · 가장 가까운 추격차 '+Math.round(nearest)+'m';$('zone').className='hud jam';
 }
 
+
+// ---------------- 기름통 (에너지 회복) ----------------
+function makeCan(){const g=new THREE.Group();const red=lamb(0xe53935);
+  g.add(box(0.7,0.9,0.4,0,0,0.45,0,red));g.add(box(0.5,0.12,0.42,0xb71c1c,0,0.6,0));g.add(box(0.36,0.1,0.12,0x8d0000,0,0.98,0));g.add(box(0.18,0.12,0.18,0xfdd835,0.2,0.95,0));
+  const t=textPlane('⛽','#e53935','#ffffff',0.4,0.4,'bold 90px sans-serif',128);t.position.set(0,0.45,0.205);g.add(t);const t2=t.clone();t2.rotation.y=Math.PI;t2.position.z=-0.205;g.add(t2);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(1.2,10,8),new THREE.MeshBasicMaterial({color:0xff8a80,transparent:true,opacity:0.15}));glow.position.y=0.5;g.add(glow);return g;}
+const cans=[];const CAN_HEAL=25;
+function pickupCans(dt,t){
+  for(let i=cans.length-1;i>=0;i--){const c=cans[i];c.mesh.rotation.y+=dt*1.5;c.mesh.position.y=0.3+Math.sin(t*2.5+c.ph)*0.2;
+    if(Math.hypot(c.x-player.x,c.z-player.z)<2.6){scene.remove(c.mesh);cans.splice(i,1);energy=clamp(energy+CAN_HEAL,0,100);setEnergy(energy);logMsg('⛽ 기름통 획득! 에너지 +'+CAN_HEAL,true,3);onCanPicked&&onCanPicked();}}
+}
+let onCanPicked=null;
+
 // ---------------- 총 ----------------
 const bullets=[];const bulletG=new THREE.SphereGeometry(0.12,6,4),bulletM=new THREE.MeshBasicMaterial({color:0xfff176});let fireCd=0;
 function fire(){const dx=Math.cos(player.a),dz=Math.sin(player.a);const m=new THREE.Mesh(bulletG,bulletM);m.position.set(player.x+dx*2.4,0.9,player.z+dz*2.4);scene.add(m);bullets.push({m,vx:dx*140+dx*Math.max(0,player.speed),vz:dz*140+dz*Math.max(0,player.speed),life:0.8});
@@ -589,6 +646,36 @@ function updateBullets(dt){
     if(!hit)for(const a of animals){if(Math.abs(a.x-b.m.position.x)<a.len/2+0.6&&Math.abs(a.z-b.m.position.z)<a.len/2+0.6){hit=true;
       if(a.state!=='flee'){a.state='flee';a.timer=rnd(3,5);a.stun=0;a.attackCd=15;logMsg(a.name+' 퇴치! 도로 밖으로 도망갑니다',true,2);}break;}}
     if(hit){scene.remove(b.m);bullets.splice(i,1);}}
+}
+
+
+// ---------------- 차량 충돌 물리 (밀림/날아감) ----------------
+const MASS={sedan:1.3,suv:1.8,bus:12,truck:8,trailer:18,delivery:2.5,moto:0.25,police:1.5,garbage:9,luxury:2.0,tow:7};
+const CAR_MASS={police:1.5,fire:12,sportage:1.8,grandeur:1.7,taxi:1.4,moto:0.25,bike:0.08};
+function crashPhysics(v,vvx,vvz,nx,nz,pen){ // n: 상대차 → 플레이어 방향 단위벡터
+  const m1=CAR_MASS[car.key]||1.5,m2=MASS[v.type]||1.5;
+  const hx=Math.cos(player.a),hz=Math.sin(player.a);
+  const pvx=hx*player.speed+player.svx,pvz=hz*player.speed+player.svz;
+  // 겹침 분리 (질량 반비례)
+  player.x+=nx*pen*(m2/(m1+m2)+0.05);player.z+=nz*pen*(m2/(m1+m2)+0.05);
+  const rvn=(pvx-vvx)*nx+(pvz-vvz)*nz; if(rvn>=0)return 0;
+  const e=0.35;const J=-(1+e)*rvn/(1/m1+1/m2);
+  // 플레이어: 새 속도 벡터 → 진행방향 성분 + 옆으로 밀리는 성분
+  const nvx=pvx+J/m1*nx,nvz=pvz+J/m1*nz;
+  const fwd=nvx*hx+nvz*hz,lat=-nvx*hz+nvz*hx;
+  player.speed=clamp(fwd,-15,60);player.svx=-hz*lat*0.9;player.svz=hx*lat*0.9;
+  const dvP=Math.abs(J/m1);player.spin+=(lat>0?1:-1)*Math.min(3,dvP*0.12)*(Math.random()<0.5?1:1);
+  if(dvP>12){player.airT=0.9;player.vy=5+Math.min(6,dvP*0.25);}
+  // 상대 차량: 밀림 / 날아감
+  const dv=J/m2;v.pvx=(v.pvx||0)-dv*nx;v.pvz=(v.pvz||0)-dv*nz;v.speed*=0.6;v.stun=Math.max(v.stun||0,1.5+Math.min(3,dv*0.1));
+  v.spin=(v.spin||0)+(Math.random()<0.5?1:-1)*Math.min(5,dv*0.15);
+  if(dv>9){v.air=1;v.vy=4+Math.min(8,dv*0.3);v.y=v.y||0;}
+  return dv;
+}
+function applyPushPlayer(dt){
+  player.x+=player.svx*dt;player.z+=player.svz*dt;const k=Math.exp(-3*dt);player.svx*=k;player.svz*=k;
+  player.a+=player.spin*dt;player.spin*=Math.exp(-2.5*dt);
+  if(player.airT>0){player.airT-=dt;player.y+=player.vy*dt;player.vy-=22*dt;if(player.y<0){player.y=0;player.airT=0;player.vy=0;}}else player.y=0;
 }
 
 // ---------------- 충돌 유틸 ----------------
@@ -606,8 +693,16 @@ function logMsg(msg,good,delta){
 }
 function showEnd(title,sub){gameOver=true;sirenOff();const o=$('overlay');o.style.display='flex';o.querySelector('h1').textContent=title;o.querySelector('p').textContent=sub;
   const s=Math.floor(elapsed);$('stats').innerHTML='안전 점수 '+score+' · 주행 '+(distance/1000).toFixed(1)+'km · '+Math.floor(s/60)+'분 '+(s%60)+'초<br><br><b>아무 키나 눌러 다시 시작</b>';}
-function setEnergy(v){if(v<energy)v=energy-(energy-v)*car.dmgMul;energy=clamp(v,0,100);$('energyV').textContent=Math.round(energy);const f=$('energyFill');f.style.width=energy+'%';f.style.background=energy>50?'#66bb6a':energy>25?'#ffb300':'#ef5350';
+function setEnergy(v){if(v<energy)v=energy-(energy-v)*car.dmgMul;energy=clamp(v,0,100);$('energyV').textContent=Math.round(energy);const f=$('energyFill');f.style.width=energy+'%';energyWarn();
   if(energy<=0&&!gameOver)showEnd('게임 오버','자동차 에너지가 모두 소진되었습니다');}
+
+let lowWarned=0;
+function energyWarn(){
+  const box=$('energy');
+  if(energy<=15){box.className='hud crit';if(lowWarned<2){lowWarned=2;logMsg('🚨 에너지 위험! 기름통(빨간 통)을 빨리 찾으세요',false,0);}}
+  else if(energy<=35){box.className='hud low';if(lowWarned<1){lowWarned=1;logMsg('⚠ 에너지 부족! 도로 위 빨간 기름통을 먹으면 회복됩니다',false,0);}}
+  else{box.className='hud';lowWarned=0;}
+}
 const rule={speedT:0,lastSpeed:0,lastWrong:0,lastSide:0,lastHit:0,lastRail:0,lastMed:0};
 if(window.__fromSeoul){score=Math.max(0,window.__fromSeoul.score);$('scoreV').textContent=score;energy=clamp(window.__fromSeoul.energy,1,100);setEnergy(energy);
   const o=$('overlay');o.querySelector('p').textContent='서울 톨게이트를 통과했습니다. 부산까지 고속도로를 달리세요!';setTimeout(()=>logMsg('서울에서 진입 — 차량·에너지·점수 유지됨',true,0),500);}
@@ -662,11 +757,12 @@ function drawTraffic(){
   tc.fillStyle='#fff';tc.font='12px sans-serif';tc.fillText('전방 3km 교통상황',8,15);
   const gx=gxOf(player.x);const span=3000;
   for(let i=0;i<W-16;i++){const z=zoneAt(gx+(i/(W-16))*span);tc.fillStyle=z==='jam'?'#e53935':z==='slow'?'#fb8c00':'#43a047';tc.fillRect(8+i,26,1,14);}
-  tc.fillStyle='#fff';tc.fillRect(8,24,2,18);tc.font='11px sans-serif';tc.fillText('현위치',6,54);tc.fillText('1km',8+(W-16)/3-10,54);tc.fillText('2km',8+(W-16)*2/3-10,54);tc.fillText('3km',W-30,54);
+  {const bl=0.5+0.5*Math.sin(performance.now()/150);tc.fillStyle='rgba(255,60,60,'+(0.35+0.5*bl)+')';tc.beginPath();tc.arc(9,33,7+3*bl,0,Math.PI*2);tc.fill();tc.fillStyle=bl>0.5?'#fff':'#ff1744';tc.fillRect(7,24,4,18);}tc.font='11px sans-serif';tc.fillText('현위치',6,54);tc.fillText('1km',8+(W-16)/3-10,54);tc.fillText('2km',8+(W-16)*2/3-10,54);tc.fillText('3km',W-30,54);
   // 앞차들
   vehicles.forEach(v=>{if(v.dir!==1)return;const rel=v.x-player.x;if(rel<0||rel>span)return;tc.fillStyle='#ddd';tc.fillRect(8+rel/span*(W-16),28+v.lane*3,1,2);});
   animals.forEach(a=>{if(Math.abs(a.z)>RAIL)return;const rel=a.x-player.x;if(rel<0||rel>span)return;tc.fillStyle='#ffeb3b';tc.fillRect(8+rel/span*(W-16)-1,22,3,3);});
-  for(let k=0;k<=5;k++){const r=restOfPeriod(shift+k);if(!r)continue;const rel=k*P+r.x0-player.x;if(rel<0||rel>span)continue;tc.fillStyle=r.kind==='휴게소'?'#4fc3f7':'#ce93d8';tc.fillRect(8+rel/span*(W-16)-1,42,3,6);tc.font='9px sans-serif';tc.fillText(r.kind,8+rel/span*(W-16)-12,66);}
+  cans.forEach(c=>{const rel=c.x-player.x;if(rel<0||rel>span)return;tc.fillStyle='#ff1744';tc.fillRect(8+rel/span*(W-16)-1.5,27+c.z/RAIL*12,3,3);});
+  for(let k=0;k<=5;k++){if(((shift+k)%6+6)%6===TUN.gp){const rel=k*P+TUN.x0-player.x;if(rel>=-440&&rel<=span){tc.fillStyle='#78909c';tc.fillRect(8+Math.max(0,rel)/span*(W-16),42,Math.max(2,440/span*(W-16)),6);tc.font='9px sans-serif';tc.fillStyle='#b0bec5';tc.fillText('터널',8+Math.max(0,rel)/span*(W-16),66);}}const r=restOfPeriod(shift+k);if(!r)continue;const rel=k*P+r.x0-player.x;if(rel<0||rel>span)continue;tc.fillStyle=r.kind==='휴게소'?'#4fc3f7':'#ce93d8';tc.fillRect(8+rel/span*(W-16)-1,42,3,6);tc.font='9px sans-serif';tc.fillText(r.kind,8+rel/span*(W-16)-12,66);}
   tc.fillStyle='#80cbc4';tc.font='11px sans-serif';const nz=nextZoneChange(gx);if(nz)tc.fillText(nz,120,15);
 }
 function nextZoneChange(gx){const cur=zoneAt(gx);for(let d=50;d<3000;d+=50){const z=zoneAt(gx+d);if(z!==cur)return '전방 '+(d/1000).toFixed(1)+'km '+({jam:'정체',slow:'서행',open:'원활'}[z]);}return '';}
@@ -688,7 +784,7 @@ function updatePlayer(dt,t,bodies){
   player.a-=(player.speed/2.6)*Math.tan(player.steer)*dt;
   const dx=Math.cos(player.a),dz=Math.sin(player.a);
   const px0=player.x;
-  player.x+=dx*player.speed*dt;player.z+=dz*player.speed*dt;
+  player.x+=dx*player.speed*dt;player.z+=dz*player.speed*dt;applyPushPlayer(dt);
   distance+=Math.max(0,(player.x-px0));
   // 중앙분리대 / 가드레일
   const side=Math.sign(player.z)||1;
@@ -702,8 +798,8 @@ function updatePlayer(dt,t,bodies){
     if(Math.abs(v.x-player.x)>16||Math.abs(v.z-player.z)>6)continue;
     const [d,n]=segSeg([player.x,player.z],[dx,dz],player.len-player.wid,[v.x,v.z],[v.dir,0],v.len-v.wid);
     const minD=player.wid/2+v.wid/2;
-    if(d<minD){const nl=Math.hypot(n[0],n[1])||1;const push=(minD-d);player.x+=n[0]/nl*push;player.z+=n[1]/nl*push;const rel=Math.abs(player.speed-v.speed*v.dir*dx);player.speed=player.speed*0.4+v.speed*v.dir*dx*0.4;v.speed*=0.5;
-      if(t-rule.lastHit>1.5){rule.lastHit=t;const dmg=Math.round(clamp(rel*0.8,3,25));setEnergy(energy-dmg);logMsg(typeName[v.type]+'와 충돌! 에너지 -'+dmg,false,v.type==='police'?-20:-15);startPursuit(typeName[v.type]+' 충돌');}}
+    if(d<minD){const nl=Math.hypot(n[0],n[1])||1;const rel=Math.abs(player.speed-v.speed*v.dir*dx);const dv=crashPhysics(v,v.dir*v.speed,0,n[0]/nl,n[1]/nl,minD-d);
+      if(t-rule.lastHit>1.5){rule.lastHit=t;const dmg=Math.round(clamp(rel*0.8,3,25));if(dv>9)logMsg(typeName[v.type]+'가 날아갔습니다!',false,0);setEnergy(energy-dmg);logMsg(typeName[v.type]+'와 충돌! 에너지 -'+dmg,false,v.type==='police'?-20:-15);startPursuit(typeName[v.type]+' 충돌');}}
   }
   // 동물 충돌
   for(const an of animals){
@@ -725,14 +821,14 @@ function updatePlayer(dt,t,bodies){
   // 과속
   {const lim=weather.intensity>0.3?RAIN_LIMIT:100;if(kmh>lim+10){rule.speedT+=dt;if(rule.speedT>2&&t-rule.lastSpeed>4){rule.lastSpeed=t;logMsg((lim<100?'빗길 ':'')+'과속! 제한속도 '+lim+'km/h',false,-5);}}else rule.speedT=0;$('speed').className='hud'+(kmh>lim?' over':'');}
   // 구간 표시
-  if(!pursuit.on){const z=zoneAt(gxOf(player.x));$('zone').textContent=zoneName(gxOf(player.x));$('zone').className='hud '+z;}
+  if(!pursuit.on){const z=zoneAt(gxOf(player.x));$('zone').textContent=(tunnelAt(player.x)?'🚇 터널 통과 중 · ':'')+zoneName(gxOf(player.x));$('zone').className='hud '+z;}
   // 목적지
   const remain=Math.max(0,GOAL_KM-distance/1000);
   $('destText').textContent='부산까지 '+remain.toFixed(1)+'km  ·  서울에서 '+(distance/1000).toFixed(1)+'km';
   if(remain<=0&&!finished){finished=true;logMsg('부산 도착! 완주',true,50);showEnd('완주!','부산에 도착했습니다. 수고하셨습니다!');}
   $('speed').firstChild.textContent=Math.round(kmh);
   $('gear').textContent=player.speed<-0.2?'R  후진':Math.abs(player.speed)<0.2?'N  정지':'D  주행'+(hb?'  🛑 브레이크':'');
-  playerMesh.position.set(player.x,0,player.z);playerMesh.rotation.y=-player.a;
+  playerMesh.position.set(player.x,player.y||0,player.z);playerMesh.rotation.y=-player.a;playerMesh.rotation.z=player.airT>0?player.vy*0.03:0;
   playerMesh.userData.wheels.forEach(w=>{w.rotation.y-=player.speed*dt/0.34;});
   if(osc){osc.frequency.value=55+Math.abs(player.speed)*5+(up?15:0);filt.frequency.value=300+Math.abs(player.speed)*30;}
 }
@@ -740,7 +836,7 @@ function updatePlayer(dt,t,bodies){
 // ---------------- 월드 이동 (배경 반복) ----------------
 function worldShift(){
   let d=0;if(player.x>P)d=-P;else if(player.x<0)d=P;if(!d)return;
-  shift-=d/P;player.x+=d;spawnFront+=d;animalFront+=d;
+  shift-=d/P;player.x+=d;spawnFront+=d;animalFront+=d;canFront+=d;cans.forEach(c=>{c.x+=d;c.mesh.position.x=c.x;});
   vehicles.forEach(v=>{v.x+=d;v.mesh.position.x=v.x;});animals.forEach(a=>{a.x+=d;a.mesh.position.x=a.x;});chasers.forEach(c=>{c.x+=d;});bullets.forEach(b=>{b.m.position.x+=d;});
   camPos.x+=d;camLook.x+=d;
 }
@@ -764,13 +860,13 @@ function updateWeather(dt){
   const target=weather.state==='rain'?1:0;weather.intensity+=(target-weather.intensity)*Math.min(1,dt*0.25);
   const k=weather.intensity;
   if(k<0.01&&weather.state==='clear'){rain.visible=false;rainAudio(false);}
-  else{rain.visible=true;rainMat.opacity=0.75*k;
+  else{rain.visible=tunnelDark<0.5;rainMat.opacity=0.75*k;
     const pos=rainGeo.attributes.position.array;const fall=38*dt;const cx=camera.position.x,cz=camera.position.z;
     for(let i=0;i<RAIN_N;i++){pos[i*3+1]-=fall;if(pos[i*3+1]<0){pos[i*3+1]+=rainBox.h;pos[i*3]=rnd(-rainBox.w/2,rainBox.w/2);pos[i*3+2]=rnd(-rainBox.d/2,rainBox.d/2);}}
     rainGeo.attributes.position.needsUpdate=true;rain.position.set(cx,0,cz);
     if(weather.rainGain)weather.rainGain.gain.value=muted?0:0.12*k;}
   scene.background.copy(skyClear).lerp(skyRain,k);scene.fog.color.copy(fogClear).lerp(fogRain,k);scene.fog.near=FOG_NEAR*(1-0.6*k);scene.fog.far=FOG_FAR*(1-0.5*k);
-  sun.intensity=sunBase*(1-0.65*k);
+  sun.intensity=sunBase*(1-0.65*k)*(1-0.85*tunnelDark);hemi.intensity=0.9*(1-0.6*tunnelDark);scene.fog.near*=(1-0.5*tunnelDark);scene.fog.far*=(1-0.6*tunnelDark);
   const w=$('weather');if(w){w.textContent=k>0.3?'🌧 비 — 노면 젖음: 제동거리 증가, 제한속도 '+RAIN_LIMIT+'km/h':'';w.style.display=k>0.3?'block':'none';}
 }
 
@@ -788,7 +884,7 @@ function updateCamera(dt){
 }
 
 // ---------------- 메인 루프 ----------------
-updateRestAreas();fillTraffic();fillAnimals();
+updateRestAreas();updateTunnel(0);fillTraffic();fillAnimals();
 let last=performance.now(),simT=0,beaconT=0;
 function frame(now){
   requestAnimationFrame(frame);
@@ -808,14 +904,14 @@ function tick(dt){
     vehicles.forEach(v=>updateVehicle(v,dt,bodies,simT));
     updatePlayer(dt,simT,bodies);
     updateBullets(dt);updateChasers(dt,simT);updateWeather(dt);
-    worldShift();updateRestAreas();updateRestRules(dt,simT);
+    worldShift();updateRestAreas();updateRestRules(dt,simT);updateTunnel(dt);fillCans();pickupCans(dt,simT);
     beaconT+=dt;if(beaconT>0.25){beaconT=0;[...vehicles,...chasers,{mesh:playerMesh}].forEach(v=>{if(v.mesh.userData.beacons){const [r,b]=v.mesh.userData.beacons;const on=r.userData.on=!r.userData.on;r.material.color.set(on?0xff0000:0x550000);b.material.color.set(on?0x220066:0x3355ff);}});}
     const mmS=Math.floor(elapsed);$('time').textContent='주행 '+String(Math.floor(mmS/60)).padStart(2,'0')+':'+String(mmS%60).padStart(2,'0')+' · '+(distance/1000).toFixed(1)+'km';
     drawTraffic();
   }
 }
 requestAnimationFrame(frame);
-window.__dbg={player,animals,vehicles,keys,chasers,startPursuit,restAreaAt,render:()=>{updateCamera(0.016);renderer.render(scene,camera);},sim:(sec)=>{for(let i=0;i<sec*30;i++)tick(1/30);},setEnergy:v=>setEnergy(v),get shift(){return shift;},zoneAt,gxOf};
+window.__dbg={player,animals,vehicles,keys,cans:()=>cans,chasers,startPursuit,restAreaAt,render:()=>{updateCamera(0.016);renderer.render(scene,camera);},sim:(sec)=>{for(let i=0;i<sec*30;i++)tick(1/30);},setEnergy:v=>setEnergy(v),get shift(){return shift;},zoneAt,gxOf};
 </script>
 </body>
 </html>
