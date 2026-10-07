@@ -855,7 +855,7 @@ addEventListener('keydown',e=>{
 });
 addEventListener('keyup',e=>keys[e.code]=false);
 let actx,osc,gainNode,filt;
-function initAudio(){try{actx=new (window.AudioContext||window.webkitAudioContext)();osc=actx.createOscillator();osc.type='sawtooth';filt=actx.createBiquadFilter();filt.type='lowpass';filt.frequency.value=400;gainNode=actx.createGain();gainNode.gain.value=0.06;osc.connect(filt);filt.connect(gainNode);gainNode.connect(actx.destination);osc.start();}catch(e){}}
+function initAudio(){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} // 엔진 소음은 사용 안 함
 
 // ---------------- 모바일 터치 컨트롤 ----------------
 const touch={x:0,y:0,active:false};
