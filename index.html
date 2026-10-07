@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>오주한의 운전 게임</title>
+<style>
+  :root{--bg1:#0f172a;--bg2:#1e3a8a}
+  html,body{margin:0;min-height:100%;font-family:'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#fff;background:radial-gradient(1200px 600px at 50% -10%,#2563eb55,transparent),linear-gradient(160deg,var(--bg1),var(--bg2));}
+  .wrap{max-width:960px;margin:0 auto;padding:40px 20px 60px;text-align:center}
+  h1{font-size:46px;margin:10px 0 6px;letter-spacing:1px;text-shadow:0 3px 12px rgba(0,0,0,.5)}
+  .sub{opacity:.85;font-size:16px;margin-bottom:34px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:700px){.cards{grid-template-columns:1fr}h1{font-size:34px}}
+  .card{display:block;text-decoration:none;color:#fff;border-radius:18px;padding:26px 22px 24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .15s,background .15s}
+  .card:hover{transform:translateY(-4px);background:rgba(255,255,255,.13)}
+  .card .icon{font-size:64px;line-height:1;margin-bottom:10px}
+  .card h2{margin:6px 0 8px;font-size:26px}
+  .card p{margin:0;font-size:14px;opacity:.85;line-height:1.6}
+  .card .go{display:inline-block;margin-top:16px;padding:10px 26px;border-radius:999px;background:#f59e0b;color:#111;font-weight:bold;font-size:16px}
+  .card.seoul .go{background:#34d399}
+  .keys{margin-top:38px;background:rgba(0,0,0,.3);border-radius:14px;padding:18px 22px;text-align:left;font-size:14px;line-height:1.9}
+  .keys b{color:#fcd34d}
+  .keys .row{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px}
+  @media(max-width:700px){.keys .row{grid-template-columns:1fr}}
+  .foot{margin-top:24px;font-size:12px;opacity:.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🚓 오주한의 운전 게임</h1>
+  <div class="sub">플레이할 게임을 고르세요. 서울에서 별 3개를 모아 톨게이트를 지나면 고속도로로 이어집니다.</div>
+  <div class="cards">
+    <a class="card seoul" href="서울드라이브/index.html">
+      <div class="icon">🏙️</div>
+      <h2>서울 드라이브</h2>
+      <p>신호등·횡단보도가 있는 서울 도심 운전연습.<br>교통 차량, 보행자, 동물·공룡, 비 날씨.<br>⭐ 별 3개를 모아 고속도로 톨게이트 열기.</p>
+      <span class="go">시작하기 ▶</span>
+    </a>
+    <a class="card" href="고속도로운전/index.html">
+      <div class="icon">🛣️</div>
+      <h2>고속도로 운전</h2>
+      <p>서울 → 부산 30km 고속도로 주행.<br>정체·원활 구간, 터널, 휴게소·졸음쉼터.<br>길가 동물·공룡이 차를 공격합니다.</p>
+      <span class="go">시작하기 ▶</span>
+    </a>
+  </div>
+  <div class="keys">
+    <div class="row">
+      <div><b>↑↓←→ / WASD</b> 가속 · 감속(후진) · 조향</div><div><b>Space</b> 브레이크</div>
+      <div><b>X</b> 🚀 필살기 부스터 (10초 초고속) · <b>Shift</b> 🏃 달리기(도보 시)</div><div><b>F / Ctrl</b> 🔫 총 발사</div>
+      <div><b>Enter</b> 🚪 차에서 내리기 / 가까운 차 타기 (다른 차 빼앗기 가능)</div><div><b>B</b> 차량 선택 (경찰차·소방차·스포티지·그랜저·택시·오토바이·자전거)</div>
+      <div><b>C</b> 카메라 전환 · <b>R</b> 위치 초기화</div><div><b>M</b> 소리 · <b>P</b> 일시정지 · <b>T</b> 조이스틱 표시</div>
+    </div>
+    <div style="margin-top:8px;opacity:.8">📱 휴대폰에서는 오른쪽 아래 조이스틱과 왼쪽 아래 버튼으로 조작합니다.</div>
+  </div>
+  <div class="foot">자동차 에너지가 0이 되면 게임 오버 · 빨간 기름통으로 회복 · 경찰 추격은 차량·보행자 충돌 시에만</div>
+</div>
+</body>
+</html>
